@@ -1,7 +1,9 @@
 <template>
-    <page-component title="Dashboard">
-        Dashbord page
-    </page-component>
+    <PageComponent title="Surveys">
+        <template v-slot:header>
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
+        </template>
+    </PageComponent>
 </template>
 
 <script setup>
