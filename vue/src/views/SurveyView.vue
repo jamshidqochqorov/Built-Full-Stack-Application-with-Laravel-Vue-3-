@@ -27,7 +27,7 @@
                                 d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                             />
                         </svg>
-                        View Public link
+                        Umumiy havolani ko'rish
                     </a>
                     <button
                         v-if="route.params.id"
@@ -47,13 +47,13 @@
                                 clip-rule="evenodd"
                             />
                         </svg>
-                        Delete Survey
+                       So'rovnomani o'chirish
                     </button>
                 </div>
             </div>
         </template>
-        <div v-if="surveyLoading" class="flex justify-center">Loading...</div>
-        <form v-else @submit.prevent="saveSurvey" class="animate-fade-in-down">
+
+        <form  @submit.prevent="saveSurvey" class="animate-fade-in-down">
             <div class="shadow sm:rounded-md sm:overflow-hidden">
                 <!-- Survey Fields -->
                 <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
@@ -95,7 +95,7 @@
                                     @change="onImageChoose"
                                     class="absolute left-0 top-0 right-0 bottom-0 opacity-0 cursor-pointer"
                                 />
-                                Change
+                                O'zgaritish
                             </button>
                         </div>
                     </div>
@@ -176,7 +176,7 @@
 
                 <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                     <h3 class="text-2xl font-semibold flex items-center justify-between">
-                        Questions
+                       Savollar
 
                         <!-- Add new question -->
                         <button
@@ -196,7 +196,7 @@
                                     clip-rule="evenodd"
                                 />
                             </svg>
-                            Add Question
+                         Savol qo'sish
                         </button>
                         <!--/ Add new question -->
                     </h3>
@@ -219,7 +219,7 @@
                         type="submit"
                         class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        Save
+                        Saqlash
                     </button>
                 </div>
             </div>
@@ -230,9 +230,13 @@
 
 <script setup>
 import PageComponent from "@/components/PageComponent.vue";
+import QuestionEditor from "@/components/editor/QuestionEditor.vue"
+
 import store from "@/store/index.js";
 import {ref} from "vue";
 import {useRoute} from "vue-router"
+import { v4 as uuidv4 } from "uuid";
+
 const  route = useRoute();
 
 let model=ref({
@@ -247,6 +251,29 @@ if(route.params.id){
     model.value = store.state.surveys.find(
         s=>s.id===parseInt(route.params.id)
     )
+}
+function questionChange(question)
+{
+model.value.questions = model.value.questions.map((q)=>{
+    if(q.id === question.id){
+        return (JSON.parse(JSON.stringify(question)));
+    }
+    return q;
+})
+}
+function addQuestion(index){
+    const newQuestion = {
+        id:uuidv4,
+        type:'text',
+        question:"",
+        description:null,
+        data:{}
+    };
+    model.value.questions.splice(index,0,newQuestion)
+
+}
+function deleteQuestion(question) {
+    model.value.questions = model.value.questions.filter((q) => q !== question);
 }
 
 </script>

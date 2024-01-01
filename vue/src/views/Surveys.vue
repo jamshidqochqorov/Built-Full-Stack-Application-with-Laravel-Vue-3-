@@ -2,7 +2,7 @@
     <PageComponent title="Surveys">
         <template v-slot:header>
             <div class="flex justify-between items-center">
-                <h1 class="text-3xl font-bold text-gray-900">Surveys</h1>
+                <h1 class="text-3xl font-bold text-gray-900">So'rovnomalar</h1>
                 <router-link
                     :to="{ name: 'SurveyCreate' }"
                     class="py-2 px-3 text-white bg-emerald-500 rounded-md hover:bg-emerald-600"
@@ -21,7 +21,7 @@
                             d="M12 4v16m8-8H4"
                         />
                     </svg>
-                    Add new Survey
+                So'rovnoma qo'shish
                 </router-link>
             </div>
         </template>

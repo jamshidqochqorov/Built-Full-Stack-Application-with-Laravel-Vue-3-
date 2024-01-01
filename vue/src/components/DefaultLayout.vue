@@ -41,7 +41,11 @@
                                 <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
                                     <MenuItems class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                         <MenuItem  v-slot="{ active }">
-                                            <a @click="logout" :class="['block px-4 py-2 text-sm text-gray-700 cursor-pointer']">Sign Out</a>
+                                            <a @click="logout" :class="['block px-4 py-2 text-sm text-gray-700 cursor-pointer']"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
+                                            </svg>
+                                                Chiqish</a>
+
                                         </MenuItem>
                                     </MenuItems>
                                 </transition>
@@ -80,7 +84,7 @@
                         </button>
                     </div>
                     <div class="mt-3 space-y-1 px-2">
-                        <DisclosureButton as="a" @click="logout" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white cursor-pointer">Sign Out</DisclosureButton>
+                        <DisclosureButton as="a" @click="logout" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white cursor-pointer">Chiqish</DisclosureButton>
                     </div>
                 </div>
             </DisclosurePanel>
@@ -96,7 +100,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 const navigation = [
     { name: 'Dashboard', to:"Dashboard", },
-    { name: 'Surveys', to:"Surveys", },
+    { name: "So'rovnoma", to:"Surveys", },
 ]
 
 import {useStore} from "vuex";

@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
     public function register(Request $request)
     {
         $data = $request->validate([
-           'name'=>'required|string',
+            'name'=>'required|string',
             'email'=>'required|email|unique:users,email',
             'password'=>['required','confirmed',Password::min(8)->mixedCase()->numbers()->symbols()]
         ]);
@@ -30,7 +32,7 @@ class AuthController extends Controller
         ]);
 
     }
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         $credentials = $request->validate([
             'email'=>'required|email|string|exists:users,email',
@@ -45,7 +47,9 @@ class AuthController extends Controller
 
         if(!Auth::attempt($credentials,$remember))
         {
-            return response(['error'=>'The Provided credentials are not correct'],422);
+            return throw ValidationException::withMessages([
+                'email' => ["Taqdim etilgan hisob ma'lumotlari to'g'ri emas!"],
+            ]);
         }
         $user = Auth::user();
         $token = $user->createToken('main')->plainTextToken;
